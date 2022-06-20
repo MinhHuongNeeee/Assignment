@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <script>
+            function myFunction(Kyhoc) {
+                document.getElementById(Kyhoc).style.fontWeight = "bold";
+            }
+        </script>
+    </head>
+
+    <body>
+        <form method="get" action="viewGradeSemester">
+            <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="home.html"> Home </a> | Grade-book</p>
+            
+            <h1>Grade report for Lưu Minh Hương (HE160632)</h1>
+            <div style="padding-left: 50px; width:250px;float: left;">
+                <table >
+                    <tr>
+                        <td style="font-size: 20px; color: #e76b1c">TERM</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="Summer2021" onclick="myFunction('Summer2021')">Summer2021
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="Fall2021" onclick="myFunction('Fall2021')">Fall2021</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="Spring2022" onclick="myFunction('Spring2022')">Spring2022</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="Summer2022" onclick="myFunction('Summer2022')">Summer2022</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:500px;float: left;">
+                <table>
+                    <tr>
+                        <td style="font-size: 20px; color: #e76b1c">COURSE</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="MAE101" onclick="myFunction('MAE101')">Mathematics for Engineering (MAE101) </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="PRF192" onclick="myFunction('PRF192')">Programming Fundamentals (PRF192) </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="CSI104" onclick="myFunction('CSI104')">Introduction to Computer Science (CSI104) </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="CEA201" onclick="myFunction('CEA201')">Computer Organization and Architecture (CEA201)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="SSL101c" onclick="myFunction('SSL101c')">Academic Skills for University Success (SSL101c)</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:350px;float: left;">
+                <table>
+                    <tr>
+                        <td style="font-size: 20px; color: #e76b1c"><center>GRADE REPORT</center></td>
+                    </tr>
+                    <tr>
+                        <td><p style="font-size: 15px">GRADE CATEGORY</p></td>
+                        <td><p style="font-size: 15px">WEIGHT</p></td>
+                        <td><p style="font-size: 15px">VALUE</p></td>
+                    </tr>
+                   <tr>
+                       <td><p>Assignment</p></td>
+                       <td><p>10%</p></td>
+                       <td><p>7</p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Progress Test</p></td>
+                        <td><p>10%</p></td>
+                        <td><p>8</p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Workshop</p></td>
+                        <td><p>10%</p></td>
+                        <td><p>7.5</p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Practice Exam</p></td>
+                        <td><p>40%</p></td>
+                        <td><p>8.5</p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Final Exam</p></td>
+                        <td><p>30%</p></td>
+                        <td><p>7</p></td>
+                    </tr>
+                    <tr>
+                        <td><p>COURSE TOTAL</p></td>
+                        <td><p>AVARAGE</p></td>
+                        <td><p>7.8</p></td>
+                    </tr>
+                    <tr>
+                        <td><p></p></td>
+                        <td><p>STATUS</p></td>
+                        <td><p style="color:#33CC33">PASSED</p></td>
+                    </tr>
+                </table>
+            </div>
+
+        </form>
+
+    </body>
+
+</html>

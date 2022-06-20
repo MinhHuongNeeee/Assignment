@@ -1,0 +1,52 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 20, 2022, 5:35:15 PM
+    Author     : minh huong
+*/
+body{
+    margin: 0;
+    padding: 0;
+}
+.middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.grade{
+    position: relative;
+    background: none;
+    border: 1px solid;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    min-width:  200px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+}
+.grade: hover{
+    color: white;
+}
+.grade::before{
+    content:"";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #e76b1c;
+    z-index: -1;
+    transition: 0.5s;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+    transform: scaleX(0);
+}
+.grade:hover::before{
+    transform: scaleX(1);
+}

@@ -14,7 +14,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewGradeController</servlet-name>
-        <url-pattern>/view</url-pattern>
+        <url-pattern>/viewGradeSemester</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
