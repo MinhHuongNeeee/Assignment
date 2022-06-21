@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>viewGrade</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeTeacher.html"> Home </a> | View-grade</p>
+        <h1>View grade of Student</h1>
+        <form method="post" action="">
+            Choose group: <input type="text" name="groupName" value="SE1634"><br/>  <!-- cái này là dùng selected để chọn list groupName từ bảng Group -->
+            <!-- sau đấy là đẩy groupName lên servlet -> trả về list CourseID ứng với lớp đó thầy đó-->
+            Choose course:<input type="text" name="courseID" value="PRJ301">
+            <h2 style="font-size: 20px; color: rgb(255, 99, 71);"><center>STUDENT LIST</center></h2>
+            <table>
+                <tr>
+                    <td style="width:10%;"><p></p></td>
+                    <td style="width:10%;"><p>ASSIGNMENT (10%)</p></td>
+                    <td style="width:10%;"><p>PROGRESS TEST (10%)</p></td>
+                    <td style="width:10%;"><p>WORKSHOP (10%)</p></td>
+                    <td style="width:10%;"><p>PRACTICE EXAM (30%)</p></td>
+                    <td style="width:10%;"><p>FINAL EXAM (40%)</p></td>   
+                    <td style="width:10%;"><p>GRADE</p></td>
+                    <td style="width:10%;"><p>STATUS</p></td> 
+                </tr>
+                <tr>
+                    <td style="width:10%;"><p>Lưu Minh Hương</p></td>
+                    <td style="width:10%;"><p>7</p></td>
+                    <td style="width:10%;"><p>6</p></td>
+                    <td style="width:10%;"><p>8</p></td>
+                    <td style="width:10%;"><p>7</p></td>
+                    <td style="width:10%;"><p>7</p></td>    
+                    <td style="width:10%;"><p>7.5</p></td>
+                    <td style="width:10%;"><p style="color:#33CC33">PASSED</p></td>
+                </tr>
+                 <tr>
+                    <td style="width:10%;"><p>Lê Thị Anh</p></td>
+                    <td style="width:10%;"><p>2</p></td>
+                    <td style="width:10%;"><p>1</p></td>
+                    <td style="width:10%;"><p>2</p></td>
+                    <td style="width:10%;"><p>3</p></td>
+                    <td style="width:10%;"><p>1</p></td>    
+                    <td style="width:10%;"><p>2.5</p></td>
+                    <td style="width:10%;"><p style="color:#FF0000">NOTPASSED</p></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

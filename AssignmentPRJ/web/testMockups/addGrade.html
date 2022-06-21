@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>AddGrade</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeTeacher.html"> Home </a> | Add-grade</p>
+        <h1>Insert grade for Student</h1>
+        <form method="post" action="">
+            Choose group: <input type="text" name="groupName" value="SE1634"><br/>  <!-- cái này là dùng selected để chọn list groupName từ bảng Group -->
+            <!-- sau đấy là đẩy groupName lên servlet -> trả về list CourseID ứng với lớp đó thầy đó-->
+            Choose course:<input type="text" name="courseID" value="PRJ301">
+            <h2 style="font-size: 20px; color: rgb(255, 99, 71);"><center>STUDENT LIST</center></h2>
+            <table>
+                <tr>
+                    <td style="width:10%;"><p></p></td>
+                    <td style="width:10%;"><p>ASSIGNMENT (10%)</p></td>
+                    <td style="width:10%;"><p>PROGRESS TEST (10%)</p></td>
+                    <td style="width:10%;"><p>WORKSHOP (10%)</p></td>
+                    <td style="width:10%;"><p>PRACTICE EXAM (30%)</p></td>
+                    <td style="width:10%;"><p>FINAL EXAM (40%)</p></td>   
+                </tr>
+                <tr>
+                    <td style="width:10%;"><p>Lưu Minh Hương</p></td>
+                    <td style="width:10%;"><p><input type="text" name="assignment" value="7"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="progressTest" value="6"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="workshop" value="8"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="practiceExam" value="7"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="finalExam" value="7"></p></td>      
+                </tr>
+                <tr>
+                    <td style="width:10%;"><p>Lê Thị Anh</p></td>
+                    <td style="width:10%;"><p><input type="text" name="assignment" value="2"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="progressTest" value="3"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="workshop" value="1.5"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="practiceExam" value="2"></p></td>
+                    <td style="width:10%;"><p><input type="text" name="finalExam" value="1"></p></td>   
+                </tr>
+                
+            </table>
+            <center><input type="submit" value="Save" style=" padding: 10px 20px; font-size: 16px;"></center>
+        </form>
+    </body>
+</html>
