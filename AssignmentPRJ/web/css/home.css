@@ -29,6 +29,7 @@ body{
     border-radius: 5px;
     cursor: pointer;
     transition: color 0.4s linear;
+    text-decoration: none;
 }
 .grade: hover{
     color: white;

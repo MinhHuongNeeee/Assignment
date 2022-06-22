@@ -11,7 +11,7 @@ package model;
 public class Study {
     private Student student;
     private Course course;
-    private String term;
+    private String semester;
 
     public Student getStudent() {
         return student;
@@ -29,11 +29,13 @@ public class Study {
         this.course = course;
     }
 
-    public String getTerm() {
-        return term;
+    public String getSemester() {
+        return semester;
     }
 
-    public void setTerm(String term) {
-        this.term = term;
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
+
+
 }

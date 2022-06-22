@@ -8,10 +8,11 @@ package model;
  *
  * @author minh huong
  */
-public class Course {
+public class Assessment {
     private String courseID;
-    private String courseName;
-    private int credit; 
+    private String gradeCategory;
+    private float weight;
+
     public String getCourseID() {
         return courseID;
     }
@@ -20,20 +21,20 @@ public class Course {
         this.courseID = courseID;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getGradeCategory() {
+        return gradeCategory;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setGradeCategory(String gradeCategory) {
+        this.gradeCategory = gradeCategory;
     }
 
-    public int getCredit() {
-        return credit;
+    public float getWeight() {
+        return weight;
     }
 
-    public void setCredit(int credit) {
-        this.credit = credit;
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
     
 }

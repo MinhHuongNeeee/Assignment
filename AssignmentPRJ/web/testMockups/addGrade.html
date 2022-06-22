@@ -13,9 +13,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeTeacher.html"> Home </a> | Add-grade</p>
         <h1>Insert grade for Student</h1>
         <form method="post" action="">
-            Choose group: <input type="text" name="groupName" value="SE1634"><br/>  <!-- cái này là dùng selected để chọn list groupName từ bảng Group -->
+            Choose group: <input type="text" name="groupName" value="SE1634">
+            <input type="submit" value="Choose"><br/>  <!-- cái này là dùng selected để chọn list groupName từ bảng Group -->
             <!-- sau đấy là đẩy groupName lên servlet -> trả về list CourseID ứng với lớp đó thầy đó-->
-            Choose course:<input type="text" name="courseID" value="PRJ301">
+            Choose course: <input type="text" name="courseID" value="PRJ301">
+            <input type="submit" value="Choose">
             <h2 style="font-size: 20px; color: rgb(255, 99, 71);"><center>STUDENT LIST</center></h2>
             <table>
                 <tr>
