@@ -9,17 +9,19 @@ package model;
  * @author minh huong
  */
 public class Assessment {
-    private String courseID;
+    private Course course;
     private String gradeCategory;
     private float weight;
 
-    public String getCourseID() {
-        return courseID;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
+    public void setCourse(Course course) {
+        this.course = course;
     }
+
+
 
     public String getGradeCategory() {
         return gradeCategory;

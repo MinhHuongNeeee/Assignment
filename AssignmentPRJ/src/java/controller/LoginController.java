@@ -11,7 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Student;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -60,13 +61,22 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-        LoginDBContext ldb= new LoginDBContext();
-        Student stu = ldb.getStudentByUserAndPass(user, pass);
-        if (stu != null) {
-            request.setAttribute("student", stu);
-            request.getRequestDispatcher("view/Student.jsp").forward(request, response);
+        LoginDBContext ldb = new LoginDBContext();
+        Account acc = ldb.getAccountByUsernamePassword(user, pass);
+        HttpSession session = request.getSession();
+        if (acc != null) {
+            //nếu acc là student
+            if (acc.getRole().getId() == 1) {
+                session.setAttribute("student", acc);
+                request.getRequestDispatcher("view/homeStudent.jsp").forward(request, response);
+            }
+            if (acc.getRole().getId() == 2) {
+                session.setAttribute("teacher", acc);
+                request.getRequestDispatcher("testMockups/homeTeacher.html").forward(request, response);
+            }
         } else {
-            response.getWriter().println("Login failed! Student doesn't exist!!!");
+            request.setAttribute("error", "username or password invalid!");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 

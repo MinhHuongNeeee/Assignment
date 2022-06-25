@@ -11,7 +11,7 @@ package model;
 public class Group {
     private String groupName;
     private String courseID;
-    private String userName;
+    private Account teacher; // mỗi (lớp-môn) ứng với 1 teacher duy nhất
 
     public String getGroupName() {
         return groupName;
@@ -29,12 +29,15 @@ public class Group {
         this.courseID = courseID;
     }
 
-    public String getUserName() {
-        return userName;
+    public Account getTeacher() {
+        return teacher;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setTeacher(Account teacher) {
+        this.teacher = teacher;
     }
-    
+
+
+
+
 }

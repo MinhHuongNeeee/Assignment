@@ -20,10 +20,10 @@
         <div class="middle">
             <br/><br/>
             <div>
-                <a style="text-decoration: none" href="gradeSemester" class="grade semester">Mark Report</a>
+                <a style="text-decoration: none; color: black;" href="gradeSemester" class="grade semester">Mark Report</a>
             </div>
-            <div style="padding-top: 35px;">
-                <a style="text-decoration: none" href="gradeTranscript" class="grade transcript">Grade Transcript</a>
+            <div style="padding-top: 50px;">
+                <a style="text-decoration: none; color: black;" href="gradeTranscript" class="grade transcript">Grade Transcript</a>
             </div>           
         </div>
     </form>

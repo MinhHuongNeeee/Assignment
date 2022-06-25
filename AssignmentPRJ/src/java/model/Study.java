@@ -9,15 +9,15 @@ package model;
  * @author minh huong
  */
 public class Study {
-    private Student student;
+    private Account student;
     private Course course;
     private String semester;
 
-    public Student getStudent() {
+    public Account getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(Account student) {
         this.student = student;
     }
 

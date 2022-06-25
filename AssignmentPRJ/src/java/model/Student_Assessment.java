@@ -9,18 +9,20 @@ package model;
  * @author minh huong
  */
 public class Student_Assessment {
-    private String userName;
+    private Account student;
     private String courseID;
     private String gradeCategory;
     private float value;
 
-    public String getUserName() {
-        return userName;
+    public Account getStudent() {
+        return student;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setStudent(Account student) {
+        this.student = student;
     }
+
+
 
     public String getCourseID() {
         return courseID;

@@ -10,26 +10,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Course;
-import model.Student;
+import model.Account;
 import model.Study;
 
 /**
  *
  * @author minh huong
  */
-public class StudyDBContext extends DBContext<Study>{
+public class StudyDBContext extends DBContext<Study> {
+
     public ArrayList<Study> getListByUserName(String userName) {
-        ArrayList<Study> studyList= new ArrayList<>();
+        ArrayList<Study> studyList = new ArrayList<>();
         try {
-            String sql="select distinct semester from Study where userName=? ";
+            String sql = "Select distinct semester,dateStart from Study \n"
+                    + "where username=?\n"
+                    + "order by dateStart asc";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, userName);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Student student = new Student();
-                student.setUserName(userName);
-                Study s= new Study();
+                Account student = new Account();
+                student.setUsername(userName);
+                Study s = new Study();
+                s.setStudent(student);
                 s.setSemester(rs.getString("semester"));
                 studyList.add(s);
             }
@@ -38,13 +41,15 @@ public class StudyDBContext extends DBContext<Study>{
         }
         return studyList;
     }
-        public static void main(String[] args) {
-        StudyDBContext sdb= new StudyDBContext();
+
+    public static void main(String[] args) {
+        StudyDBContext sdb = new StudyDBContext();
         ArrayList<Study> listByUserName = sdb.getListByUserName("huonglmhe160632");
-            for (Study study : listByUserName) {
-                System.out.println(study.getSemester());
-            }
+        for (Study study : listByUserName) {
+            System.out.println(study.getSemester());
+        }
     }
+
     @Override
     public ArrayList<Study> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -69,5 +74,5 @@ public class StudyDBContext extends DBContext<Study>{
     public void delete(Study model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

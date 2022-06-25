@@ -10,28 +10,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Student;
+import model.Account;
+import model.Role;
 
 /**
  *
  * @author minh huong
  */
-public class LoginDBContext extends DBContext<Student> {
-
-    public Student getStudentByUserAndPass(String username, String password) {
+public class LoginDBContext extends DBContext<Account>{
+    public Account getAccountByUsernamePassword(String username, String password) {
         try {
-            String sql = "select username,displayName from Student where username=? and password=?";
+            String sql = "SELECT userName,displayName,dob,address,gender,rid FROM Account\n"
+                    + "WHERE username = ? AND password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Student s= new Student();
-                String ss= username.substring(username.length()-8, username.length()-1);
-                s.setID(ss);
-                s.setUserName(username);
-                s.setDisplayName(rs.getString("displayName"));
-                return s;
+            if(rs.next())
+            {
+                Role r= new Role();
+                r.setId(rs.getInt("rid"));
+                Account account = new Account();
+                account.setUsername(rs.getString("userName"));
+                account.setDisplayName(rs.getString("displayname"));
+                account.setDob(rs.getDate("dob"));
+                account.setAddress(rs.getString("address"));
+                account.setGender(rs.getBoolean("gender"));
+                account.setRole(r);
+                return account;
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,27 +45,27 @@ public class LoginDBContext extends DBContext<Student> {
         return null;
     }
     @Override
-    public ArrayList<Student> list() {
+    public ArrayList<Account> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Student get(int id) {
+    public Account get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Student model) {
+    public void insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Student model) {
+    public void update(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Student model) {
+    public void delete(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
