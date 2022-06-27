@@ -48,6 +48,7 @@ courseID varchar(10),
 gradeCategory varchar(20),
 Primary key (courseID,gradeCategory),
 [Weight] int,
+[index] int,
 foreign key (courseID) references Course(courseID),
 )
 
@@ -56,12 +57,11 @@ userName nvarchar(50),
 courseID varchar(10),
 gradeCategory varchar(20),
 [value] float,
-[index] int,
 Primary key (userName,courseID,gradeCategory),
 foreign key (userName) references Account(userName),
 foreign key (courseID,GradeCategory) references Assessment(courseID,gradeCategory),
 )
-
+drop table Assessment
 create table [Group](
 GroupName varchar(6) not null,
 courseID varchar(10),
@@ -98,16 +98,6 @@ insert into Study values
 ('huonglmhe160632','MAS291','Summer2022','2022-05-09'),
 ('huonglmhe160632','PRJ301','Summer2022','2021-05-09'),
 ('huonglmhe160632','SSG104','Fall2021','2021-09-05')
-	 
-insert into Student_Assessment values
-('huonglmhe160632','JPD113','Final Exam',8,	3),
-('huonglmhe160632','JPD113','Mid Term',8.5,	2),
-('huonglmhe160632','JPD113','Small Test',8,	1),
-('huonglmhe160632','SSG104','Activity',9,1),
-('huonglmhe160632','SSG104','Final Exam',8,	4),
-('huonglmhe160632','SSG104','Project',9,	3),
-('huonglmhe160632','SSG104','Quiz',8.5,2)
-
 insert into [Group] values
 ('SE1625','CSI104','anhvn'),
 ('SE1625','DBI202','sonnt5'),
@@ -137,4 +127,11 @@ insert into Account_Group values
 ('SE1634','SSG104','lannthe160987'),
 ('SE1634','SSG104','kienpthe167892')
 
-
+insert into Student_Assessment values
+('huonglmhe160632','JPD113','Final Exam',8),
+('huonglmhe160632','JPD113','Mid Term',8.5),
+('huonglmhe160632','JPD113','Small Test',8),
+('huonglmhe160632','SSG104','Activity',9),
+('huonglmhe160632','SSG104','Final Exam',8),
+('huonglmhe160632','SSG104','Project',9),
+('huonglmhe160632','SSG104','Quiz',8.5)
