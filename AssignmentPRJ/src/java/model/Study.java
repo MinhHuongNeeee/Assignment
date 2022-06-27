@@ -12,7 +12,25 @@ public class Study {
     private Account student;
     private Course course;
     private String semester;
+    private float grade;
+    private String status;
 
+    public float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public Account getStudent() {
         return student;
     }

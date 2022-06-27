@@ -13,6 +13,15 @@ public class Student_Assessment {
     private String courseID;
     private String gradeCategory;
     private float value;
+    private float total;
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 
     public Account getStudent() {
         return student;

@@ -21,8 +21,6 @@ public class Assessment {
         this.course = course;
     }
 
-
-
     public String getGradeCategory() {
         return gradeCategory;
     }

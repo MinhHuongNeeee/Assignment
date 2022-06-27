@@ -68,7 +68,8 @@ public class LoginController extends HttpServlet {
             //nếu acc là student
             if (acc.getRole().getId() == 1) {
                 session.setAttribute("student", acc);
-                request.getRequestDispatcher("view/homeStudent.jsp").forward(request, response);
+//                request.getRequestDispatcher("/view/homeStudent.jsp").forward(request, response);
+                response.sendRedirect("view/homeStudent.jsp");
             }
             if (acc.getRole().getId() == 2) {
                 session.setAttribute("teacher", acc);

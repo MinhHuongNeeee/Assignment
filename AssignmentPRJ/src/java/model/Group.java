@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author minh huong
@@ -12,7 +14,16 @@ public class Group {
     private String groupName;
     private String courseID;
     private Account teacher; // mỗi (lớp-môn) ứng với 1 teacher duy nhất
+    private ArrayList<Account> listAccount; // moi (lop-mon) co 1 danh sach sv
 
+    public ArrayList<Account> getListAccount() {
+        return listAccount;
+    }
+
+    public void setListAccount(ArrayList<Account> listAccount) {
+        this.listAccount = listAccount;
+    }
+    
     public String getGroupName() {
         return groupName;
     }

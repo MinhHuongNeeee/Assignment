@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,6 +19,16 @@ public class Account {
     private boolean gender;
     private Date dob;
     private String address;
+    private ArrayList<Group> listGroup; // moi sv thuoc ve nhieu (lop-mon)
+
+    public ArrayList<Group> getListGroup() {
+        return listGroup;
+    }
+
+    public void setListGroup(ArrayList<Group> listGroup) {
+        this.listGroup = listGroup;
+    }
+    
     public Role getRole() {
         return role;
     }

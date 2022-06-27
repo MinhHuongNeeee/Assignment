@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Assessment;
+import model.Course;
+import model.Student_Assessment;
 import model.Study;
 
 /**
@@ -19,6 +22,74 @@ import model.Study;
  */
 public class StudyDBContext extends DBContext<Study> {
 
+    // show diem thanh phan 1 mon 
+    public ArrayList<Student_Assessment> listValueScore(String userName, String courseID) {
+        ArrayList<Student_Assessment> listValueScore = new ArrayList<>();
+        try {
+
+            String sql = "select Assessment.gradeCategory,Weight,value,[index],SUM(Weight*value)/100 as total \n"
+                    + "from Assessment inner join Student_Assessment\n"
+                    + "on Assessment.courseID= Student_Assessment.courseID and Assessment.gradeCategory=Student_Assessment.gradeCategory\n"
+                    + "where Assessment.courseID=? and username=?\n"
+                    + "group by Assessment.courseID,Assessment.gradeCategory,Weight,value,[index]\n"
+                    + "order by [index] asc";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, courseID);
+            stm.setString(2, userName);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account student = new Account();
+                student.setUsername(userName);
+                Course c = new Course();
+                c.setCourseID(courseID);
+                Assessment ass = new Assessment();
+                ass.setCourse(c);
+                ass.setGradeCategory(rs.getString("gradeCategory"));
+                ass.setWeight(rs.getFloat("Weight"));
+                Student_Assessment sta = new Student_Assessment();
+                sta.setGradeCategory(rs.getString("gradeCategory"));
+                sta.setValue(rs.getFloat("value"));
+                sta.setTotal(rs.getFloat("total"));
+                listValueScore.add(sta);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudyDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listValueScore;
+    }
+
+    //get courseID
+    public ArrayList<Study> getListByUserNameAndTerm(String userName, String term) {
+        ArrayList<Study> studyList = new ArrayList<>();
+        try {
+
+            String sql = "select s.courseID, courseName from Study s inner join Course c\n"
+                    + "on s.courseID=c.courseID\n"
+                    + "where s.semester=? and  username=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, term);
+            stm.setString(2, userName);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account student = new Account();
+                student.setUsername(userName);
+                Course c = new Course();
+                c.setCourseID(rs.getString("courseID"));
+                c.setCourseName(rs.getString("courseName"));
+                Study s = new Study();
+                s.setStudent(student);
+                s.setCourse(c);
+                s.setSemester(term);
+                studyList.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudyDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return studyList;
+    }
+
+    // get term order by asc
     public ArrayList<Study> getListByUserName(String userName) {
         ArrayList<Study> studyList = new ArrayList<>();
         try {
@@ -44,9 +115,9 @@ public class StudyDBContext extends DBContext<Study> {
 
     public static void main(String[] args) {
         StudyDBContext sdb = new StudyDBContext();
-        ArrayList<Study> listByUserName = sdb.getListByUserName("huonglmhe160632");
-        for (Study study : listByUserName) {
-            System.out.println(study.getSemester());
+        ArrayList<Student_Assessment> listValueScore = sdb.listValueScore("huonglmhe160632","JPD113");
+        for (Student_Assessment student_Assessment : listValueScore) {
+            System.out.println(student_Assessment.getGradeCategory()+" "+ student_Assessment.getValue()+" "+student_Assessment.getTotal() );
         }
     }
 

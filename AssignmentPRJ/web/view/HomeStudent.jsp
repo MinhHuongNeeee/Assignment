@@ -16,7 +16,7 @@
 </head>
 <body>
     <form action="homeStudent" method="post">
-        <h1 style="font-size: 45px"> <center>Academic information for ${requestScope.student.displayName} ${requestScope.student.ID}</center></h1>
+        <h1 style="font-size: 45px"> <center>Academic information for ${sessionScope.student.displayName}</center></h1>
         <div class="middle">
             <br/><br/>
             <div>
