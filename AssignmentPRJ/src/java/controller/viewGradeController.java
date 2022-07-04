@@ -39,23 +39,6 @@ public class viewGradeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet viewGradeController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet viewGradeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         StudyDBContext StudyDB = new StudyDBContext();
         HttpSession session = request.getSession();
         String userName = ((Account) session.getAttribute("student")).getUsername();
@@ -67,20 +50,24 @@ public class viewGradeController extends HttpServlet {
             request.setAttribute("studyListToShowCourseID", studyListToShowCourseID);
         }
         String courseID = request.getParameter("courseID");
-        if (courseID != null) {            
+
+        if (courseID != null) {
             ArrayList<Student_Assessment> sta = StudyDB.listValueScore(userName, courseID);
-            float grade=0;
-            String status="";
+            float grade = 0;
             for (Student_Assessment stua : sta) {
                 grade += stua.getTotal();
             }
-            if (grade>=5 ) status="PASSED";
-            else status="notpass";
             request.setAttribute("listValueScore", sta);
-            request.setAttribute("status", status);
             request.setAttribute("grade", grade);
         }
+
         request.getRequestDispatcher("gradeSemester.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     @Override

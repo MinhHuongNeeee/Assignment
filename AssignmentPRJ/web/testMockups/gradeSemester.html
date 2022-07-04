@@ -9,6 +9,19 @@
         <script>
             function myFunction(Kyhoc) {
                 document.getElementById(Kyhoc).style.fontWeight = "bold";
+                window.location.href = "?term=" + Kyhoc;
+            }
+            function myFunction1(courseID) {
+                document.getElementById(courseID).style.fontWeight = "bold";
+                if(!window.location.search().includes("courseID"))
+                    window.location.href += "&courseID=" + courseID;
+                else 
+                {
+                    var link = window.location.href;
+                    var str= [];
+                    str= link.split('&',2);
+                    window.location.href= str[0] + "&courseID=" + courseID;
+                }
             }
         </script>
     </head>
@@ -51,27 +64,27 @@
                     </tr>
                     <tr>
                         <td>
-                            <p id="MAE101" onclick="myFunction('MAE101')">Mathematics for Engineering (MAE101) </p>
+                            <p id="MAE101" onclick="myFunction1('MAE101')">Mathematics for Engineering (MAE101) </p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p id="PRF192" onclick="myFunction('PRF192')">Programming Fundamentals (PRF192) </p>
+                            <p id="PRF192" onclick="myFunction1('PRF192')">Programming Fundamentals (PRF192) </p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p id="CSI104" onclick="myFunction('CSI104')">Introduction to Computer Science (CSI104) </p>
+                            <p id="CSI104" onclick="myFunction1('CSI104')">Introduction to Computer Science (CSI104) </p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p id="CEA201" onclick="myFunction('CEA201')">Computer Organization and Architecture (CEA201)</p>
+                            <p id="CEA201" onclick="myFunction1('CEA201')">Computer Organization and Architecture (CEA201)</p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p id="SSL101c" onclick="myFunction('SSL101c')">Academic Skills for University Success (SSL101c)</p>
+                            <p id="SSL101c" onclick="myFunction1('SSL101c')">Academic Skills for University Success (SSL101c)</p>
                         </td>
                     </tr>
                 </table>

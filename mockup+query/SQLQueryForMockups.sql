@@ -1,3 +1,4 @@
+
 -- cau query show list course trong GradeSemester
 select s.courseID, courseName from Study s inner join Course c
 on s.courseID=c.courseID
@@ -7,7 +8,7 @@ where s.semester=? and  username=?
 select Assessment.gradeCategory,Weight,value,[index],SUM(Weight*value)/100 as total 
 from Assessment inner join Student_Assessment
 on Assessment.courseID= Student_Assessment.courseID and Assessment.gradeCategory=Student_Assessment.gradeCategory
-where Assessment.courseID=? and username=?
+where Assessment.courseID='JPD113' and username='huonglmhe160632'
 group by Assessment.courseID,Assessment.gradeCategory,Weight,value,[index]
 order by [index] asc
 

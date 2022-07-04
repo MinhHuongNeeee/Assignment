@@ -4,6 +4,9 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>viewGradeController</servlet-name>
         <servlet-class>controller.viewGradeController</servlet-class>

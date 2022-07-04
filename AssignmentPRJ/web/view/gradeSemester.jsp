@@ -16,9 +16,20 @@
                 document.getElementById(Kyhoc).style.fontWeight = "bold";
                 window.location.href = "?term=" + Kyhoc;
             }
+        </script>
+        <script>
             function myFunction1(courseID) {
                 document.getElementById(courseID).style.fontWeight = "bold";
-                window.location.href = window.location.search()+ "&courseID=" + courseID;
+//                alert('window.location.search() la ' +window.location.search  );
+                if(!window.location.search.includes("courseID"))
+                    window.location.href += "&courseID=" + courseID;
+                else 
+                {
+                    var link = window.location.href;
+                    var str= [];
+                    str= link.split('&',2);
+                    window.location.href= str[0] + "&courseID=" + courseID;
+                }
             }
         </script>
     </head>
@@ -44,7 +55,8 @@
                     <table>
                         <c:forEach items="${requestScope.studyListToShowCourseID}" var="cid">
                             <tr>
-                            <p id="${cid.course.courseID}" onclick="myFunction1('${cid.course.courseID}')">
+                            <p id="${cid.course.courseID}" onclick="myFunction1('${cid.course.courseID}')"
+                               <c:if test="${param.courseID eq cid.course.courseID}">style="font-weight: bold"</c:if>>
                                 ${cid.course.courseName} (${cid.course.courseID})</p>
                             </tr>      
                             <br>
@@ -52,16 +64,42 @@
                     </table>
                 </div>
             </c:if>
-<!--            <c:if test="${requestScope.listValueScore ne null}">
-                <div style="width:500px;float: left;">
-                    <h3 style="font-size: 20px; color: #e76b1c">Grade Report </h3>                   
-                </div>
-            </c:if>
-            <c:if test="${requestScope.studyListToShowCourseID ne null} && ${requestScope.listValueScore eq null }">
-                <div style="width:500px;float: left;">
-                    <h3 style="font-size: 20px; color: #e76b1c">NULL </h3>                   
-                </div>
-            </c:if> -->
+            <c:if test="${requestScope.listValueScore ne null}">
+                <div style="width:350px;float: left;">
+                    <h3 style="font-size: 20px; color: #e76b1c">GRADE REPORT</h3>
+                    <table>
+                        <tr>
+                            <td><p style="font-size: 18px">GRADE CATEGORY</p></td>
+                            <td><p style="font-size: 18px">WEIGHT</p></td>
+                            <td><p style="font-size: 18px">VALUE</p></td>
+                        </tr>
+
+                        <c:forEach items="${requestScope.listValueScore}" var="lv">
+                            <tr>
+                                <td><p>${lv.assessment.gradeCategory}</p></td>
+                                <td><p>${lv.assessment.weight} %</p></td>
+                                <c:if test="${lv.value != -1}"><td><p>${lv.value}</p></td></c:if>
+                                <c:if test="${lv.value == -1}"><td><p></p></td></c:if>
+                                </tr>
+                        </c:forEach>
+                        <tr>
+                            <td><p>COURSE TOTAL</p></td>
+                            <td><p>AVARAGE</p></td>
+                            <c:if test="${requestScope.grade>=0}"><td><p>${requestScope.grade}</p></td></c:if>
+                            <c:if test="${requestScope.grade<0}"><td><p></p></td></c:if>
+                            </tr>
+                            <tr>
+                                <td><p></p></td>
+                                <td><p>STATUS</p></td>
+                            <c:if test="${requestScope.grade<0}"><td><p style="color:#33CC33">STUDYING</p></td></c:if>
+                            <c:if test="${requestScope.grade >=5}"><td><p style="color:#33CC33">PASSED</p></td></c:if>
+                            <c:if test="${requestScope.grade <5 &&requestScope.grade >=0}"><td><p style="color:color:#FF0000">NOTPASSED</p></td></c:if>
+                            </tr>
+                        </table>
+
+
+                </c:if>
+
         </form>
     </body>
 </html>

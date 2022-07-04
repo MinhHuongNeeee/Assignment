@@ -127,11 +127,20 @@ insert into Account_Group values
 ('SE1634','SSG104','lannthe160987'),
 ('SE1634','SSG104','kienpthe167892')
 
-insert into Student_Assessment values
-('huonglmhe160632','JPD113','Final Exam',8),
-('huonglmhe160632','JPD113','Mid Term',8.5),
-('huonglmhe160632','JPD113','Small Test',8),
-('huonglmhe160632','SSG104','Activity',9),
-('huonglmhe160632','SSG104','Final Exam',8),
-('huonglmhe160632','SSG104','Project',9),
-('huonglmhe160632','SSG104','Quiz',8.5)
+
+insert into Student_Assessment (userName,courseID,gradeCategory) values
+('huonglmhe160632','MAS291','Computer Project'),
+('huonglmhe160632','MAS291','Assignment'),
+('huonglmhe160632','MAS291','Progress Test'),
+('huonglmhe160632','MAS291','Final Exam')
+
+insert into Assessment values 
+('MAE101','Assignment',30,1),
+('MAE101','Progress Test',30,2),
+('MAE101','Final Exam',30,3),
+('EDT202c','Theory Exam',50,1),
+('EDT202c','Practice Exam',30,2),
+('MAS291','Computer Project',15,1),
+('MAS291','Assignment',20,2),
+('MAS291','Progress Test',30,3),
+('MAS291','Final Exam',35,4)

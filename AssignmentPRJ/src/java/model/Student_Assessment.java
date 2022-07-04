@@ -10,8 +10,7 @@ package model;
  */
 public class Student_Assessment {
     private Account student;
-    private String courseID;
-    private String gradeCategory;
+    private Assessment assessment;
     private float value;
     private float total;
 
@@ -31,22 +30,12 @@ public class Student_Assessment {
         this.student = student;
     }
 
-
-
-    public String getCourseID() {
-        return courseID;
+    public Assessment getAssessment() {
+        return assessment;
     }
 
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
-    }
-
-    public String getGradeCategory() {
-        return gradeCategory;
-    }
-
-    public void setGradeCategory(String gradeCategory) {
-        this.gradeCategory = gradeCategory;
+    public void setAssessment(Assessment assessment) {
+        this.assessment = assessment;
     }
 
     public float getValue() {
