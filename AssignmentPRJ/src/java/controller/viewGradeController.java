@@ -54,11 +54,16 @@ public class viewGradeController extends HttpServlet {
         if (courseID != null) {
             ArrayList<Student_Assessment> sta = StudyDB.listValueScore(userName, courseID);
             float grade = 0;
+            int status =0;
             for (Student_Assessment stua : sta) {
                 grade += stua.getTotal();
             }
+            if(grade >=5) status=1;
+            else if (grade<5 && grade >=0) status=0;
+            else status=-1;
             request.setAttribute("listValueScore", sta);
             request.setAttribute("grade", grade);
+            request.setAttribute("status", status);
         }
 
         request.getRequestDispatcher("gradeSemester.jsp").forward(request, response);

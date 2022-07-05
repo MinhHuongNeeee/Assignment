@@ -13,7 +13,7 @@ public class Study {
     private Course course;
     private String semester;
     private float grade;
-    private String status;
+    private int status;
 
     public float getGrade() {
         return grade;
@@ -23,14 +23,15 @@ public class Study {
         this.grade = grade;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-    
+
+
     public Account getStudent() {
         return student;
     }

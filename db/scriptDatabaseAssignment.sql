@@ -129,10 +129,10 @@ insert into Account_Group values
 
 
 insert into Student_Assessment (userName,courseID,gradeCategory) values
-('huonglmhe160632','MAS291','Computer Project'),
-('huonglmhe160632','MAS291','Assignment'),
-('huonglmhe160632','MAS291','Progress Test'),
-('huonglmhe160632','MAS291','Final Exam')
+('huonglmhe160632','CSI104','Presentation'),
+('huonglmhe160632','CSI104','Lab'),
+('huonglmhe160632','CSI104','Progress Test'),
+('huonglmhe160632','CSI104','Final Exam')
 
 insert into Assessment values 
 ('MAE101','Assignment',30,1),
