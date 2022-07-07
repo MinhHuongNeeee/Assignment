@@ -84,6 +84,11 @@ public class Account {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "username=" + username + ", password=" + password + ", displayName=" + displayName + ", role=" + role + ", gender=" + gender + ", dob=" + dob + ", address=" + address + ", listGroup=" + listGroup + '}';
+    }
     
     
 }

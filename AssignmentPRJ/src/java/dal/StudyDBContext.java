@@ -24,52 +24,6 @@ import model.Study;
  */
 public class StudyDBContext extends DBContext<Study> {
 
-    // show diem thanh phan 1 mon 
-    public ArrayList<Student_Assessment> listValueScore(String userName, String courseID) {
-        ArrayList<Student_Assessment> listValueScore = new ArrayList<>();
-        try {
-
-            String sql = "select Assessment.gradeCategory,Weight,isnull(value,-1) as value ,[index],isnull(SUM(Weight*value)/100,-1) as total \n"
-                    + "                    from Assessment left join Student_Assessment\n"
-                    + "                    on Assessment.courseID= Student_Assessment.courseID and Assessment.gradeCategory=Student_Assessment.gradeCategory\n"
-                    + "                    where Assessment.courseID=? and username=?\n"
-                    + "                    group by Assessment.courseID,Assessment.gradeCategory,Weight,value,[index]\n"
-                    + "                    order by [index] asc";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, courseID);
-            stm.setString(2, userName);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Account student = new Account();
-                student.setUsername(userName);
-                Course c = new Course();
-                c.setCourseID(courseID);
-                Assessment ass = new Assessment();
-                ass.setCourse(c);
-                ass.setGradeCategory(rs.getString("gradeCategory"));
-                ass.setWeight(rs.getFloat("Weight"));
-                Student_Assessment sta = new Student_Assessment();
-                sta.setAssessment(ass);
-                sta.setValue(rs.getFloat("value"));
-                sta.setTotal(rs.getFloat("total"));
-
-                listValueScore.add(sta);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudyDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listValueScore;
-    }
-
-    public static void main(String[] args) {
-        StudyDBContext db = new StudyDBContext();
-        ArrayList<Study> listValueScore = db.getListForTranscript("huonglmhe160632");
-        for (Study s : listValueScore) {
-            System.out.println(s.getCourse().getCourseID()+ " "+ s.getGrade()+" "+s.getStatus());
-        }
-
-    }
-
     //get courseID
     public ArrayList<Study> getListByUserNameAndTerm(String userName, String term) {
         ArrayList<Study> studyList = new ArrayList<>();
@@ -119,7 +73,7 @@ public class StudyDBContext extends DBContext<Study> {
                 studyList.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return studyList;
     }
@@ -162,7 +116,7 @@ public class StudyDBContext extends DBContext<Study> {
                 else
                 {
                     //no dang hoc -> chua co diem tong ket -> Grade =-1
-                    if(rs.getFloat("Grade")==-1)
+                    if(rs.getFloat("Grade")<0)
                     {
                         s.setGrade(-1);
                         s.setStatus(-1);
@@ -177,7 +131,7 @@ public class StudyDBContext extends DBContext<Study> {
                 studyList.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return studyList;
     }

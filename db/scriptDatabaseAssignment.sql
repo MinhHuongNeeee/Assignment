@@ -53,11 +53,11 @@ foreign key (courseID) references Course(courseID),
 )
 
 create table Student_Assessment(
+said int primary key not null,
 userName nvarchar(50),
 courseID varchar(10),
 gradeCategory varchar(20),
 [value] float,
-Primary key (userName,courseID,gradeCategory),
 foreign key (userName) references Account(userName),
 foreign key (courseID,GradeCategory) references Assessment(courseID,gradeCategory),
 )
@@ -127,12 +127,63 @@ insert into Account_Group values
 ('SE1634','SSG104','lannthe160987'),
 ('SE1634','SSG104','kienpthe167892')
 
+drop table Student_Assessment
+insert into Student_Assessment (userName,courseID,gradeCategory,[value]) values
+('huonglmhe160632','SSG104','Activity',-100),
+('huonglmhe160632','SSG104','Project',-100),
+('huonglmhe160632','SSG104','Quiz',-100),
+('huonglmhe160632','SSG104','Final Exam',-100),
 
-insert into Student_Assessment (userName,courseID,gradeCategory) values
-('huonglmhe160632','CSI104','Presentation'),
-('huonglmhe160632','CSI104','Lab'),
-('huonglmhe160632','CSI104','Progress Test'),
-('huonglmhe160632','CSI104','Final Exam')
+('huonglmhe160632','CSI104','Progress Test',-100),
+('huonglmhe160632','CSI104','Presentation',-100),
+('huonglmhe160632','CSI104','Lab',-100),
+('huonglmhe160632','CSI104','Final Exam',-100)
+
+('quynhpnhe167829','PRJ301','Progress Test',-100),
+('quynhpnhe167829','PRJ301','workshop',-100),
+('quynhpnhe167829','PRJ301','Assignment',-100),
+('quynhpnhe167829','PRJ301','Practice Exam',-100),
+('quynhpnhe167829','PRJ301','Final Exam',-100),
+
+('anpbhe161234','PRJ301','Progress Test',-100),
+('anpbhe161234','PRJ301','workshop',-100),
+('anpbhe161234','PRJ301','Assignment',-100),
+('anpbhe161234','PRJ301','Practice Exam',-100),
+('anpbhe161234','PRJ301','Final Exam',-100),
+
+('kienpthe167892','PRJ301','Progress Test',-100),
+('kienpthe167892','PRJ301','workshop',-100),
+('kienpthe167892','PRJ301','Assignment',-100),
+('kienpthe167892','PRJ301','Practice Exam',-100),
+('kienpthe167892','PRJ301','Final Exam',-100),
+
+('huonglmhe160632','PRJ301','Progress Test',-100),
+('huonglmhe160632','PRJ301','workshop',-100),
+('huonglmhe160632','PRJ301','Assignment',-100),
+('huonglmhe160632','PRJ301','Practice Exam',-100),
+('huonglmhe160632','PRJ301','Final Exam',-100),
+
+('lannthe160987','PRJ301','Progress Test',-100),
+('lannthe160987','PRJ301','workshop',-100),
+('lannthe160987','PRJ301','Assignment',-100),
+('lannthe160987','PRJ301','Practice Exam',-100),
+('lannthe160987','PRJ301','Final Exam',-100),
+
+('huonglmhe160632','JPD113','Mid Term',9),
+('huonglmhe160632','JPD113','Small Test',9),
+('huonglmhe160632','JPD113','Final Exam',8.5),
+
+('huonglmhe160632','EDT202c','Practice Exam',3),
+('huonglmhe160632','EDT202c','Final Exam',4),
+
+('huonglmhe160632','MAE101','Assignment',-100),
+('huonglmhe160632','MAE101','Progress Test',8.5),
+('huonglmhe160632','MAE101','Final Exam',-100),
+
+('huonglmhe160632','CSI104','Progress Test',-100),
+('huonglmhe160632','CSI104','Presentation',-100),
+('huonglmhe160632','CSI104','Lab',-100),
+('huonglmhe160632','CSI104','Final Exam',-100)
 
 insert into Assessment values 
 ('MAE101','Assignment',30,1),

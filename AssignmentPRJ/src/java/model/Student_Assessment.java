@@ -9,10 +9,19 @@ package model;
  * @author minh huong
  */
 public class Student_Assessment {
+    private int said;
     private Account student;
     private Assessment assessment;
     private float value;
     private float total;
+
+    public int getSaid() {
+        return said;
+    }
+
+    public void setSaid(int said) {
+        this.said = said;
+    }
 
     public float getTotal() {
         return total;
@@ -44,6 +53,11 @@ public class Student_Assessment {
 
     public void setValue(float value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Student_Assessment{" + "said=" + said + ", student=" + student + ", assessment=" + assessment + ", value=" + value + ", total=" + total + '}';
     }
     
 }

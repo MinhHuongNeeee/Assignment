@@ -8,24 +8,32 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <servlet-name>viewGradeController</servlet-name>
-        <servlet-class>controller.viewGradeController</servlet-class>
+        <servlet-name>gradeSemesterController</servlet-name>
+        <servlet-class>controller.gradeSemesterController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>gradeTranscriptController</servlet-name>
         <servlet-class>controller.gradeTranscriptController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addGradeController</servlet-name>
+        <servlet-class>controller.addGradeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewGradeController</servlet-name>
+        <servlet-name>gradeSemesterController</servlet-name>
         <url-pattern>/view/gradeSemester</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>gradeTranscriptController</servlet-name>
         <url-pattern>/view/gradeTranscript</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addGradeController</servlet-name>
+        <url-pattern>/view/addGrade</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

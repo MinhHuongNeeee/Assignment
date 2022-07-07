@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.LoginDBContext;
+import dal.AccountDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-        LoginDBContext ldb = new LoginDBContext();
+        AccountDBContext ldb = new AccountDBContext();
         Account acc = ldb.getAccountByUsernamePassword(user, pass);
         HttpSession session = request.getSession();
         if (acc != null) {
@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
             }
             if (acc.getRole().getId() == 2) {
                 session.setAttribute("teacher", acc);
-                request.getRequestDispatcher("testMockups/homeTeacher.html").forward(request, response);
+                response.sendRedirect("view/homeTeacher.jsp");
             }
         } else {
             request.setAttribute("error", "username or password invalid!");

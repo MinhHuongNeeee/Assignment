@@ -14,15 +14,16 @@ public class Group {
     private String groupName;
     private String courseID;
     private Account teacher; // mỗi (lớp-môn) ứng với 1 teacher duy nhất
-    private ArrayList<Account> listAccount; // moi (lop-mon) co 1 danh sach sv
+    private ArrayList<Account> listStudent; // moi (lop-mon) co 1 danh sach sv
 
-    public ArrayList<Account> getListAccount() {
-        return listAccount;
+    public ArrayList<Account> getListStudent() {
+        return listStudent;
     }
 
-    public void setListAccount(ArrayList<Account> listAccount) {
-        this.listAccount = listAccount;
+    public void setListStudent(ArrayList<Account> listStudent) {
+        this.listStudent = listStudent;
     }
+
     
     public String getGroupName() {
         return groupName;
