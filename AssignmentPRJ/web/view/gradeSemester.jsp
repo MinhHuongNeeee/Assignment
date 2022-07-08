@@ -36,9 +36,10 @@
         </script>
     </head>
     <body>
+        <h1 style="font-size: 45px">FPT University Academic Portal</h1>
         <form method="post" action="gradeSemester">
             <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeStudent.jsp"> Home </a> | Grade-book</p>
-            <h1>Grade report for ${sessionScope.student.displayName}</h1>
+            <h1>Grade report for ${sessionScope.acc.displayName}</h1>
             <div style="padding-left: 50px; width:250px;float: left;">
                 <h3 style="font-size: 20px; color: #e76b1c;padding-left: 9px;">TERM</h3>
                 <table>

@@ -34,64 +34,73 @@
         </script>
     </head>
     <body>
+        <h1 style="font-size: 45px">FPT University Academic Portal</h1>
         <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeTeacher.jsp"> Home </a> | Add-grade</p>
         <h1>Insert grade for Student</h1>
         <form method="post" action="addGrade">
-            Choose Group:
-            <c:forEach items="${requestScope.groupName}" var ="g">                          
-                <p id="${g.groupName}" onclick="myFunction('${g.groupName}')"<c:if test="${param.groupName eq g.groupName}">style="font-weight: bold"</c:if>>
-                    ${g.groupName}</p>      
-                </c:forEach>
-            <br/>
-            <c:if test="${requestScope.groupList ne null}">
-                Choose CourseID: 
-                <c:forEach items="${requestScope.groupList}" var ="gl">
-                    <p id="${gl.courseID}" onclick="myFunction1('${gl.courseID}')"<c:if test="${param.courseID eq gl.courseID}">style="font-weight: bold"</c:if>>
-                        ${gl.courseID}</p>                 
-                    </c:forEach>
-        </c:if>
-        <br/>
-        <c:if test="${requestScope.listValueScore ne null}">
-            <table border="1px">
-                <tr>
-                    <td></td>
-                    <c:forEach items="${requestScope.asses}" var="a">
-                        <td>${a.gradeCategory}</td> 
-                    </c:forEach>
-                <tr/>
-                <c:forEach items="${requestScope.stus}" var="s">
-                    <tr>
-                        <td>${s.displayName}</td>
-                        <c:forEach items="${requestScope.asses}" var="a">
-                            <td>
-                                <input name="score${s.username}_${a.gradeCategory}" class="short_textfield" type="text"
-                                       <c:forEach items="${requestScope.listValueScore}" var="e">   
-                                           <c:if test="${e.student.username eq s.username 
-                                                         and e.assessment.gradeCategory eq a.gradeCategory and e.value>=0}">
-                                                 value="${e.value}"
-                                           </c:if>
-                                       </c:forEach>
-                                       />
-                                <input name="eid${s.username}_${a.gradeCategory}" type="hidden"
-                                       <c:forEach items="${requestScope.listValueScore}" var="e">   
-                                           <c:if test="${e.student.username eq s.username and e.assessment.gradeCategory eq a.gradeCategory}">
-                                               value="${e.said}"
-                                           </c:if>
-                                       </c:forEach>
-                                       />
-                                <input name="component" value="${s.username}_${a.gradeCategory}" type="text" hidden
-                                       />
-                            </td> 
+            <div style="padding-left: 20px; width:200px;float: left;">
+                <h3 style="font-size: 20px; color: #e76b1c;padding-left: 9px;">Choose Group</h3>
+                <table>
+                    <c:forEach items="${requestScope.groupName}" var ="g">                          
+                        <div id="${g.groupName}" onclick="myFunction('${g.groupName}')"<c:if test="${param.groupName eq g.groupName}">style="font-weight: bold"</c:if>>
+                            ${g.groupName}</div>      
                         </c:forEach>
-                    <tr/>  
-                </c:forEach>
-            </table>
-            <input type="text" hidden name="name" value="${requestScope.name}">
-            <input type="text" hidden name="courseID" value="${requestScope.courseID}">
-            <input type="submit" value="Save"/>     
-        </c:if>
-        <br/>
+                </table>
+            </div>
+            <div style="width:600px;float: left;height: 150px">
+                <c:if test="${requestScope.groupList ne null}">
+                    <h3 style="font-size: 20px; color: #e76b1c">Choose CourseID</h3>
+                    <table>
+                        <c:forEach items="${requestScope.groupList}" var ="gl">
+                            <p id="${gl.courseID}" onclick="myFunction1('${gl.courseID}')"<c:if test="${param.courseID eq gl.courseID}">style="font-weight: bold"</c:if>>
+                                ${gl.courseID}</p>                 
+                            </c:forEach>
+                    </table>
+                </c:if>
+            </div>
+            <c:if test="${requestScope.listValueScore ne null}">
+                <div style="padding-left: 20px; width:800px;float: left;">
+                    <table style="border-collapse: inherit">
+                            <tr>
+                                <td></td>
+                                <c:forEach items="${requestScope.asses}" var="a">
+                                    <td>${a.gradeCategory}</td> 
+                                </c:forEach>
+                            <tr/>
+                            <c:forEach items="${requestScope.stus}" var="s">
+                                <tr>
+                                    <td>${s.displayName}</td>
+                                    <c:forEach items="${requestScope.asses}" var="a">
+                                        <td>
+                                            <input name="score${s.username}_${a.gradeCategory}" class="short_textfield" type="text"
+                                                   <c:forEach items="${requestScope.listValueScore}" var="e">   
+                                                       <c:if test="${e.student.username eq s.username 
+                                                                     and e.assessment.gradeCategory eq a.gradeCategory and e.value>=0}">
+                                                             value="${e.value}"
+                                                       </c:if>
+                                                   </c:forEach>
+                                                   />
+                                            <input name="eid${s.username}_${a.gradeCategory}" type="hidden"
+                                                   <c:forEach items="${requestScope.listValueScore}" var="e">   
+                                                       <c:if test="${e.student.username eq s.username and e.assessment.gradeCategory eq a.gradeCategory}">
+                                                           value="${e.said}"
+                                                       </c:if>
+                                                   </c:forEach>
+                                                   />
+                                            <input name="component" value="${s.username}_${a.gradeCategory}" type="text" hidden
+                                                   />
+                                        </td> 
+                                    </c:forEach>
+                                <tr/>  
+                            </c:forEach>
+                        </table>
+                </div>
+                <input type="text" hidden name="name" value="${requestScope.name}">
+                <input type="text" hidden name="courseID" value="${requestScope.courseID}">
+                <div style="padding-left: 20px; width:680px;float: contour;"> <input type="submit" value="Save"/>     </div>
+                </c:if>
+            <br/>
 
-    </form>
-</body>
+        </form>
+    </body>
 </html>

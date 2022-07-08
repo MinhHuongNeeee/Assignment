@@ -43,7 +43,7 @@ public class gradeSemesterController extends HttpServlet {
         StudyDBContext StudyDB = new StudyDBContext();
         StudentAssessmentDBContext sa= new StudentAssessmentDBContext();        
         HttpSession session = request.getSession();
-        String userName = ((Account) session.getAttribute("student")).getUsername();
+        String userName = ((Account) session.getAttribute("acc")).getUsername();
         ArrayList<Study> studyList = StudyDB.getListByUserName(userName);
         session.setAttribute("studyList", studyList);
         String term = request.getParameter("term");

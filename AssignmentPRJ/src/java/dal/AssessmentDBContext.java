@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 import model.Assessment;
+import model.Course;
 
 /**
  *
@@ -30,7 +31,10 @@ public class AssessmentDBContext extends DBContext<Assessment> {
             ResultSet rs= stm.executeQuery();
             while(rs.next())
             {
+                Course c= new Course();
+                c.setCourseID(courseID);
                 Assessment a= new Assessment();
+                a.setCourse(c);
                 a.setGradeCategory(rs.getString("gradeCategory"));
                 a.setWeight(rs.getFloat("Weight"));
                 assessments.add(a);

@@ -98,18 +98,7 @@ public class StudentAssessmentDBContext extends DBContext<Student_Assessment> {
     }
 
     public static void main(String[] args) {
-        StudentAssessmentDBContext db = new StudentAssessmentDBContext();
-        ArrayList<Student_Assessment> listValueScore = new ArrayList<>();
-        Student_Assessment sa= new Student_Assessment();
-        sa.setSaid(52);
-       
-        sa.setValue((float) 7.5);
-        listValueScore.add(sa);
-        Student_Assessment sa1= new Student_Assessment();
-        sa1.setSaid(53);
-        sa1.setValue((float) 8.0);
-        listValueScore.add(sa1);
-        db.saveChanges(listValueScore);
+
     }
 
     @Override
@@ -151,12 +140,12 @@ public class StudentAssessmentDBContext extends DBContext<Student_Assessment> {
                     stm.setInt(2, exam.getSaid());
                     stm.setFloat(1, exam.getValue());
                     stm.executeUpdate();
-                } 
+                }
             }
             //connection.commit();
         } catch (SQLException ex) {
             System.out.println(ex);
-        } 
+        }
 
     }
 

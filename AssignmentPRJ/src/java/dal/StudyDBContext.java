@@ -24,6 +24,55 @@ import model.Study;
  */
 public class StudyDBContext extends DBContext<Study> {
 
+    // lấy điểm tổng kết của từng hsinh trong 1 group
+    public ArrayList<Study> listGrade() {
+        ArrayList<Study> listValueScore = new ArrayList<>();
+        try {
+            String sql = "with t as (select Assessment.courseID,username, Assessment.gradeCategory,Weight,value ,SUM(Weight*value)/100 as total \n"
+                    + "from Assessment left join Student_Assessment\n"
+                    + "on Assessment.courseID= Student_Assessment.courseID and Assessment.gradeCategory=Student_Assessment.gradeCategory\n"
+                    + "group by Assessment.courseID,username,Assessment.gradeCategory,Weight,value )\n"
+                    + "select t.courseID,username, sum(total) as grade from t\n"
+                    + "group by courseID,username\n"
+                    + "\n";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account student = new Account();
+                student.setUsername(rs.getString(2));
+                Course c = new Course();
+                c.setCourseID(rs.getString(1));
+                Assessment ass = new Assessment();
+                ass.setCourse(c);
+                Study s = new Study();
+                s.setCourse(c);
+                s.setStudent(student);
+                Float grade= rs.getFloat("grade");
+                 grade=(float) (Math.round(grade*100.0)/100.0);
+                s.setGrade(grade);
+                if (rs.getFloat("grade") < 0) {
+                    s.setStatus(-1); //đang học
+                } else if (rs.getFloat("grade") >= 0 && rs.getFloat("grade") < 5) {
+                    s.setStatus(0); //tạch
+                } else {
+                    s.setStatus(1);
+                }
+                listValueScore.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudyDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listValueScore;
+    }
+
+    public static void main(String[] args) {
+        StudyDBContext db = new StudyDBContext();
+        ArrayList<Study> listGrade = db.listGrade();
+        for (Study study : listGrade) {
+            System.out.println(study.getCourse().getCourseID()+ study.getStudent().getUsername()+" "+study.getGrade()+" "+study.getStatus());
+        }
+    }
+
     //get courseID
     public ArrayList<Study> getListByUserNameAndTerm(String userName, String term) {
         ArrayList<Study> studyList = new ArrayList<>();
@@ -99,33 +148,30 @@ public class StudyDBContext extends DBContext<Study> {
             while (rs.next()) {
                 Account student = new Account();
                 student.setUsername(userName);
-                Course c= new Course();
+                Course c = new Course();
                 c.setCourseID(rs.getString(1));
                 c.setCourseName(rs.getString(2));
                 c.setCredit(rs.getInt(4));
                 Study s = new Study();
                 s.setStudent(student);
                 s.setCourse(c);
-                Date date= rs.getDate(3);
+                Date date = rs.getDate(3);
                 // neu no chua hoc den mon nay -> startDate sau ngay hom nay -> Grade=-2
-                if(date.after(Date.valueOf(LocalDate.now())))
-                {
+                if (date.after(Date.valueOf(LocalDate.now()))) {
                     s.setGrade(-2);
                     s.setStatus(-2);
-                }
-                else
-                {
+                } else {
                     //no dang hoc -> chua co diem tong ket -> Grade =-1
-                    if(rs.getFloat("Grade")<0)
-                    {
+                    if (rs.getFloat("Grade") < 0) {
                         s.setGrade(-1);
                         s.setStatus(-1);
-                    }
-                    else 
-                    {
+                    } else {
                         s.setGrade(rs.getFloat("Grade"));
-                        if(rs.getFloat("Grade")>=5) s.setStatus(1);
-                        else s.setStatus(0);
+                        if (rs.getFloat("Grade") >= 5) {
+                            s.setStatus(1);
+                        } else {
+                            s.setStatus(0);
+                        }
                     }
                 }
                 studyList.add(s);

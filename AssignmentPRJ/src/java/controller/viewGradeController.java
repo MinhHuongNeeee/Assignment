@@ -8,6 +8,7 @@ import dal.AccountDBContext;
 import dal.AssessmentDBContext;
 import dal.GroupDBContext;
 import dal.StudentAssessmentDBContext;
+import dal.StudyDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,25 +17,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Arrays;
 import model.Account;
 import model.Assessment;
-import model.Course;
 import model.Group;
 import model.Student_Assessment;
+import model.Study;
 
 /**
  *
  * @author minh huong
  */
-public class addGradeController extends HttpServlet {
+public class viewGradeController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account teacher = (Account) session.getAttribute("acc");
@@ -52,53 +47,31 @@ public class addGradeController extends HttpServlet {
         StudentAssessmentDBContext saDB = new StudentAssessmentDBContext();
         if (courseID != null) {
             AccountDBContext accDB = new AccountDBContext();
+            StudyDBContext studyDB= new StudyDBContext();
             AssessmentDBContext assDB = new AssessmentDBContext();
             ArrayList<Student_Assessment> listValueScore = saDB.listAssessmentOfGroup(courseID, groupName);
             ArrayList<Account> stus = accDB.listStudentInGroup(groupName, courseID);
             ArrayList<Assessment> asses = assDB.listAssByCourseID(courseID);
+            ArrayList<Study> listGrade = studyDB.listGrade();
             request.setAttribute("listValueScore", listValueScore);
             request.setAttribute("stus", stus);
             request.setAttribute("asses", asses);
+            request.setAttribute("listGrade", listGrade);
         }
-        request.getRequestDispatcher("addGrade.jsp").forward(request, response);
+        request.getRequestDispatcher("viewGrade.jsp").forward(request, response);
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String groupName = request.getParameter("name");
-        StudentAssessmentDBContext saDB = new StudentAssessmentDBContext();
-        String courseID = request.getParameter("courseID");
-        String[] components = request.getParameterValues("component");
-        if (components != null) {
-            ArrayList<Student_Assessment> exams = new ArrayList<>();
-            for (String component : components) {
-                String sid = component.split("_")[0];
-                String aid = component.split("_")[1];
-                Student_Assessment e = new Student_Assessment();
-                String eid = request.getParameter("eid" + sid + "_" + aid);
-                e.setSaid(Integer.parseInt(eid));
-                String score = request.getParameter("score" + sid + "_" + aid);
-                if (score.length() > 0) {
-                    e.setValue(Float.parseFloat(score));
-                } else {
-                    e.setValue(-100);
-                }
-                Account s = new Account();
-                s.setUsername(sid);
-                Assessment a = new Assessment();
-                a.setGradeCategory(aid);
-                e.setAssessment(a);
-                e.setStudent(s);
-                exams.add(e);
-            }
-            for (Student_Assessment exam : exams) {
-                response.getWriter().println("said: "+exam.getSaid()+" value: "+exam.getValue());
-            }
-            saDB.saveChanges(exams);
-//            response.getWriter().print("addGrade?groupName="+groupName+"&courseID="+courseID);
-            response.sendRedirect("addGrade?groupName="+groupName+"&courseID="+courseID);
-        }
+        processRequest(request, response);
     }
 
 }
