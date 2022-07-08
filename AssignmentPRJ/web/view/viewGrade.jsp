@@ -49,6 +49,11 @@
                 cursor:pointer;
             }
         </style>
+        <script>
+            function showInfor(username) {
+                window.location.href = "../infor?username=" + username;
+            }
+        </script>
     </head>
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
@@ -88,7 +93,7 @@
                         <tr/>
                         <c:forEach items="${requestScope.stus}" var="s">
                             <tr>
-                                <td>${s.displayName}</td>
+                                <td id="${s.username}" onclick="showInfor('${s.username}')">${s.displayName}</td>
                                 <c:forEach items="${requestScope.asses}" var="a">
                                     <td>
                                         <c:forEach items="${requestScope.listValueScore}" var="e">   

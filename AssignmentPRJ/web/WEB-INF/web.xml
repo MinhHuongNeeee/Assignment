@@ -57,7 +57,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>showInfor</servlet-name>
-        <url-pattern>/view/information</url-pattern>
+        <url-pattern>/infor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

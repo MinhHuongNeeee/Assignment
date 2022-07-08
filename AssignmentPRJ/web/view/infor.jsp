@@ -14,33 +14,33 @@
     </head>
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
-    <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="homeStudent.jsp"> Home </a> | User Detail</p>
-    <h1 style="text-align: center;font-size: 40px"> Information of ${sessionScope.acc.displayName}</h1>
+    <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="view/homeStudent.jsp"> Home </a> | User Detail</p>
+    <h1 style="text-align: center;font-size: 40px"> Information of ${requestScope.account.displayName}</h1>
     <table style="padding-left: 40px; font-size: 20px">
             <tr>
                 <td style="width: 200px; height: 50px">User Name</td>
-                <td>${sessionScope.acc.username}</td>
+                <td>${requestScope.account.username}</td>
             </tr>
             <tr>
                 <td style="width: 200px; height: 50px">Full Name</td>
-                <td>${sessionScope.acc.displayName}</td>
+                <td>${requestScope.account.displayName}</td>
             </tr>
             <tr>
                 <td style="width: 200px; height: 50px">Gender</td>
-                <c:if test="${sessionScope.acc.gender}">
+                <c:if test="${requestScope.account.gender}">
                 <td>Female</td>
                 </c:if>
-                <c:if test="${!sessionScope.acc.gender}">
+                <c:if test="${!requestScope.account.gender}">
                 <td>Male</td>
                 </c:if>
             </tr>
             <tr>
                 <td style="width: 200px; height: 50px">Date of birth</td>
-                <td>${sessionScope.acc.dob}</td>
+                <td>${requestScope.account.dob}</td>
             </tr>
             <tr>
                 <td style="width: 200px; height: 50px">Address</td>
-                <td>${sessionScope.acc.address}</td>
+                <td>${requestScope.account.address}</td>
             </tr>
     </table>
             

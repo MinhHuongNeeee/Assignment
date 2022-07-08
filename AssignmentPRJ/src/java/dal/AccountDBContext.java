@@ -30,7 +30,7 @@ public class AccountDBContext extends DBContext<Account> {
             stm.setString(2, CourseID);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Role r= new Role();
+                Role r = new Role();
                 r.setId(1);
                 Account account = new Account();
                 account.setUsername(rs.getString("userName"));
@@ -47,13 +47,15 @@ public class AccountDBContext extends DBContext<Account> {
         }
         return accounts;
     }
+
     public static void main(String[] args) {
-        AccountDBContext adb= new AccountDBContext();
-        ArrayList<Account> listStudentInGroup=adb.listStudentInGroup("SE1634", "PRJ301");
+        AccountDBContext adb = new AccountDBContext();
+        ArrayList<Account> listStudentInGroup = adb.listStudentInGroup("SE1634", "PRJ301");
         for (Account account : listStudentInGroup) {
             System.out.println(account.getUsername());
         }
     }
+
     public Account getAccountByUsernamePassword(String username, String password) {
         try {
             String sql = "SELECT userName,displayName,dob,address,gender,rid FROM Account\n"
@@ -61,6 +63,31 @@ public class AccountDBContext extends DBContext<Account> {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Role r = new Role();
+                r.setId(rs.getInt("rid"));
+                Account account = new Account();
+                account.setUsername(rs.getString("userName"));
+                account.setDisplayName(rs.getString("displayname"));
+                account.setDob(rs.getDate("dob"));
+                account.setAddress(rs.getString("address"));
+                account.setGender(rs.getBoolean("gender"));
+                account.setRole(r);
+                return account;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Account getAccountByUsername(String username) {
+        try {
+            String sql = "SELECT userName,displayName,dob,address,gender,rid FROM Account\n"
+                    + "WHERE username = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Role r = new Role();

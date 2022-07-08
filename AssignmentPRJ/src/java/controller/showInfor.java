@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.AccountDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,7 +24,11 @@ public class showInfor extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        request.getRequestDispatcher("infor.jsp").forward(request, response);
+        AccountDBContext aDB= new AccountDBContext();
+        String username= request.getParameter("username");
+        Account account= aDB.getAccountByUsername(username);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("view/infor.jsp").forward(request, response);
     }
 
     @Override
