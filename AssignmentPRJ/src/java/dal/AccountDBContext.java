@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Feature;
 import model.Role;
 
 /**
@@ -50,32 +51,57 @@ public class AccountDBContext extends DBContext<Account> {
 
     public static void main(String[] args) {
         AccountDBContext adb = new AccountDBContext();
-        ArrayList<Account> listStudentInGroup = adb.listStudentInGroup("SE1634", "PRJ301");
-        for (Account account : listStudentInGroup) {
-            System.out.println(account.getUsername());
-        }
+        Account a = adb.getAccountByUsernamePassword("sonnt5", "12345");
+        System.out.println(a.toString());
     }
 
     public Account getAccountByUsernamePassword(String username, String password) {
         try {
-            String sql = "SELECT userName,displayName,dob,address,gender,rid FROM Account\n"
+            String sql = "SELECT userName,displayName,dob,address,gender,a.rid,r.rname, ISNULL(f.fid,-1) as fid,f.fname,f.url \n"
+                    + "FROM Account a\n"
+                    + "left join [Role] r on r.rid=a.rid\n"
+                    + "left join Role_Feature rf ON rf.rid = r.rid\n"
+                    + "LEFT JOIN Feature f ON f.fid = rf.fid\n"
                     + "WHERE username = ? AND password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                Role r = new Role();
-                r.setId(rs.getInt("rid"));
-                Account account = new Account();
-                account.setUsername(rs.getString("userName"));
-                account.setDisplayName(rs.getString("displayname"));
-                account.setDob(rs.getDate("dob"));
-                account.setAddress(rs.getString("address"));
-                account.setGender(rs.getBoolean("gender"));
-                account.setRole(r);
-                return account;
+            Account account = null;
+            Role currentRole = new Role();
+            currentRole.setId(-1);
+            Feature currentFeature = new Feature();
+            currentFeature.setId(-1);
+            while (rs.next()) {
+                if (account == null) {
+                    account = new Account();
+                    account.setUsername(rs.getString("username"));
+                    account.setDisplayName(rs.getString("displayname"));
+                    account.setDob(rs.getDate("dob"));
+                    account.setAddress(rs.getString("address"));
+                }
+                int rid = rs.getInt("rid");
+                if (rid != -1) {
+                    if (currentRole.getId() != rid) {
+                        currentRole = new Role();
+                        currentRole.setId(rid);
+                        currentRole.setName(rs.getString("rname"));
+                        account.setRole(currentRole);
+                    }
+                }
+                int fid = rs.getInt("fid");
+                if (fid != -1) {
+                    if (currentFeature.getId() != fid) {
+                        currentFeature = new Feature();
+                        currentFeature.setId(fid);
+                        currentFeature.setName(rs.getString("fname"));
+                        currentFeature.setUrl(rs.getString("url"));
+                        currentRole.getFeatures().add(currentFeature);
+                    }
+                }
+
             }
+            return account;
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }

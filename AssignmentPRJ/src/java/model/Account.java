@@ -21,6 +21,7 @@ public class Account {
     private String address;
     private ArrayList<Group> listGroup; // moi sv thuoc ve nhieu (lop-mon)
 
+    
     public ArrayList<Group> getListGroup() {
         return listGroup;
     }

@@ -59,8 +59,8 @@
                 </c:if>
             </div>
             <c:if test="${requestScope.listValueScore ne null}">
-                <div style="padding-left: 20px; width:800px;float: left;">
-                    <table style="border-collapse: inherit">
+                <div style="padding-left: 20px; width:1000px;float: left;">
+                    <table>
                             <tr>
                                 <td></td>
                                 <c:forEach items="${requestScope.asses}" var="a">

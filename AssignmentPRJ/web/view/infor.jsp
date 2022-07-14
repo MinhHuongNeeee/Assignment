@@ -14,9 +14,14 @@
     </head>
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
-    <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="view/homeStudent.jsp"> Home </a> | User Detail</p>
-    <h1 style="text-align: center;font-size: 40px"> Information of ${requestScope.account.displayName}</h1>
-    <table style="padding-left: 40px; font-size: 20px">
+        <c:if test="${requestScope.account.role.id ==1}">
+            <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="view/homeStudent.jsp"> Home </a> | User Detail</p>
+        </c:if>
+        <c:if test="${requestScope.account.role.id ==2}">
+            <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="view/homeTeacher.jsp"> Home </a> | User Detail</p>
+        </c:if>
+        <h1 style="text-align: center;font-size: 40px"> Information of ${requestScope.account.displayName}</h1>
+        <table style="padding-left: 40px; font-size: 20px">
             <tr>
                 <td style="width: 200px; height: 50px">User Name</td>
                 <td>${requestScope.account.username}</td>
@@ -28,10 +33,10 @@
             <tr>
                 <td style="width: 200px; height: 50px">Gender</td>
                 <c:if test="${requestScope.account.gender}">
-                <td>Female</td>
+                    <td>Female</td>
                 </c:if>
                 <c:if test="${!requestScope.account.gender}">
-                <td>Male</td>
+                    <td>Male</td>
                 </c:if>
             </tr>
             <tr>
@@ -42,7 +47,7 @@
                 <td style="width: 200px; height: 50px">Address</td>
                 <td>${requestScope.account.address}</td>
             </tr>
-    </table>
-            
+        </table>
+
     </body>
 </html>

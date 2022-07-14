@@ -27,15 +27,10 @@ import model.Student_Assessment;
  *
  * @author minh huong
  */
-public class addGradeController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+public class addGradeController extends BaseAuthenticationController {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account teacher = (Account) session.getAttribute("acc");
         GroupDBContext GroupDB = new GroupDBContext();
@@ -64,8 +59,7 @@ public class addGradeController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String groupName = request.getParameter("name");
         StudentAssessmentDBContext saDB = new StudentAssessmentDBContext();
         String courseID = request.getParameter("courseID");

@@ -27,7 +27,7 @@ import model.Study;
  *
  * @author minh huong
  */
-public class viewGradeController extends HttpServlet {
+public class viewGradeController extends BaseAuthenticationController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class viewGradeController extends HttpServlet {
         StudentAssessmentDBContext saDB = new StudentAssessmentDBContext();
         if (courseID != null) {
             AccountDBContext accDB = new AccountDBContext();
-            StudyDBContext studyDB= new StudyDBContext();
+            StudyDBContext studyDB = new StudyDBContext();
             AssessmentDBContext assDB = new AssessmentDBContext();
             ArrayList<Student_Assessment> listValueScore = saDB.listAssessmentOfGroup(courseID, groupName);
             ArrayList<Account> stus = accDB.listStudentInGroup(groupName, courseID);
@@ -62,15 +62,14 @@ public class viewGradeController extends HttpServlet {
 
     }
 
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 

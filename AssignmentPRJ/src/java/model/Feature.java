@@ -48,5 +48,10 @@ public class Feature {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "Feature{" + "id=" + id + ", name=" + name + ", url=" + url + ", role=" + role + '}';
+    }
+
 
 }
