@@ -4,21 +4,18 @@
  */
 package controller;
 
-import dal.AccountDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Account;
 
 /**
  *
  * @author minh huong
  */
-public class LoginController extends HttpServlet {
+public class homeTeacherController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,6 +28,7 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("homeTeacher.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,7 +43,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -59,26 +57,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        AccountDBContext ldb = new AccountDBContext();
-        Account acc = ldb.getAccountByUsernamePassword(user, pass);
-        HttpSession session = request.getSession();
-        if (acc != null) {
-            //nếu acc là student
-            if (acc.getRole().getId() == 1) {
-                session.setAttribute("acc", acc);
-//                request.getRequestDispatcher("/view/homeStudent.jsp").forward(request, response);
-                response.sendRedirect("view/homeStudent");
-            }
-            if (acc.getRole().getId() == 2) {
-                session.setAttribute("acc", acc);
-                response.sendRedirect("view/homeTeacher");
-            }
-        } else {
-            request.setAttribute("error", "username or password invalid!");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

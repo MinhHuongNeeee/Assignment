@@ -22,21 +22,21 @@ import model.Role;
  */
 public abstract class BaseAuthenticationController extends HttpServlet {
 
-    private boolean isAuthenticated(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private int isAuthenticated(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("acc");
         if (account == null) {
-            return false;
+            return -1; // chua dang nhap
         } else {
-            String visitingUrl = request.getServletPath();           
+            String visitingUrl = request.getServletPath();
             Role role = account.getRole();
             for (Feature feature : role.getFeatures()) {
                 if (feature.getUrl().equals(visitingUrl)) {
-                    return true;
+                    return 1;
                 }
-                
+
             }
-            return false;
+            return 0; // khong co quyen
         }
     }
 
@@ -52,11 +52,13 @@ public abstract class BaseAuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (isAuthenticated(request, response)) {
+        if (isAuthenticated(request, response) == 1) {
             //do something
             processGet(request, response);
+        } else if (isAuthenticated(request, response) == 0) {
+            response.getWriter().print("Access denied!");
         } else {
-            response.getWriter().println("access denied!");
+            response.sendRedirect("../login.jsp");
         }
     }
 
@@ -77,11 +79,13 @@ public abstract class BaseAuthenticationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (isAuthenticated(request, response)) {
+        if (isAuthenticated(request, response)==1) {
             //do something
             processPost(request, response);
+        } else if (isAuthenticated(request, response) == 0) {
+            response.getWriter().print("Access denied!");
         } else {
-            response.getWriter().println("access denied!");
+            response.sendRedirect("../login.jsp");
         }
     }
 

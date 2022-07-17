@@ -31,6 +31,14 @@
         <servlet-name>showInfor</servlet-name>
         <servlet-class>controller.showInfor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>homeStudentController</servlet-name>
+        <servlet-class>controller.homeStudentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>homeTeacherController</servlet-name>
+        <servlet-class>controller.homeTeacherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -58,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>showInfor</servlet-name>
         <url-pattern>/infor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homeStudentController</servlet-name>
+        <url-pattern>/view/homeStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homeTeacherController</servlet-name>
+        <url-pattern>/view/homeTeacher</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

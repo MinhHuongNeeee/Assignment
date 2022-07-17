@@ -32,7 +32,7 @@
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
         <form method="post" action="gradeTranscript">
-            <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeStudent.jsp"> Home </a> | Grade Transcript</p>
+            <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeStudent"> Home </a> | Grade Transcript</p>
             <h1 style="text-align: center;font-size: 40px ">Grade report transcript for  ${sessionScope.acc.displayName}</h1>
             <table>
                 <thead style="background-color:#FF9900;text-align: center">
