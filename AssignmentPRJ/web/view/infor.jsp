@@ -11,12 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Information</title>
-        <script>
-        function Logout()
-        {
-            window.location.href = "logout";
-        }
-    </script>
     </head>
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
@@ -26,7 +20,6 @@
         <c:if test="${sessionScope.acc.role.id ==2}">
             <p style="background-color:rgb(255, 99, 71); font-size: 22px; height: 30px"><a href="view/homeTeacher"> Home </a> | User Detail</p>
         </c:if>
-        <button onclick="Logout()" style="position: fixed; right: 100px;top: 83px; font-style: oblique;font-size: 20px;color: #e76b1c">logout</button>
         <h1 style="text-align: center;font-size: 40px"> Information of ${requestScope.account.displayName}</h1>
         <table style="padding-left: 40px; font-size: 20px">
             <tr>

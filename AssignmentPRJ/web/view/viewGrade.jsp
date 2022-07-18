@@ -54,23 +54,11 @@
                 window.location.href = "../infor?username=" + username;
             }
         </script>
-        <script>
-            function Logout()
-            {
-                window.location.href = "logout";
-            }
-        </script>
-        <script>
-            function myFunction2(username) {
-                window.location.href = "../infor?username=" + username;
-            }
-        </script>
     </head>
     <body>
         <h1 style="font-size: 45px">FPT University Academic Portal</h1>
         <p style="background-color:rgb(255, 99, 71); font-size: 22px"><a href="homeTeacher"> Home </a> | View-grade</p>
-        <button id="${sessionScope.acc.username}" onclick="myFunction2('${sessionScope.acc.username}')" style="position: fixed; right: 175px;top: 83px; font-style: oblique;font-size: 20px;color: #e76b1c">${sessionScope.acc.username}</button>
-        <button onclick="Logout()" style="position: fixed; right: 100px;top: 83px; font-style: oblique;font-size: 20px;color: #e76b1c">logout</button>
+      
         <h1>Show grade of Group</h1>
         <form method="post" action="viewGrade">
             <div style="padding-left: 20px; width:200px;float: left;">

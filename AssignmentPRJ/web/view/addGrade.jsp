@@ -61,7 +61,7 @@
                 </c:if>
             </div>
             <c:if test="${requestScope.listValueScore ne null}">
-                <div style="padding-left: 20px; width:1000px;float: left;">
+                <div style="padding-left: 20px; width:1200px;float: left;">
                     <table>
                         <tr>
                             <td></td>

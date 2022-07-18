@@ -28,6 +28,7 @@ public class homeStudentController extends BaseAuthenticationController {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session= request.getSession();
         request.getRequestDispatcher("homeStudent.jsp").forward(request, response);
     } 
 
@@ -69,6 +70,7 @@ public class homeStudentController extends BaseAuthenticationController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     @Override

@@ -51,8 +51,8 @@ public class AccountDBContext extends DBContext<Account> {
 
     public static void main(String[] args) {
         AccountDBContext adb = new AccountDBContext();
-        Account a = adb.getAccountByUsernamePassword("sonnt5", "12345");
-        System.out.println(a.toString());
+        Account a = adb.getAccountByUsernamePassword("huonglmhe160632", "12345");
+        System.out.println(a.getRole());
     }
 
     public Account getAccountByUsernamePassword(String username, String password) {
